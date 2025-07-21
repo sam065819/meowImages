@@ -2,13 +2,21 @@ import flask
 import os
 import uuid
 from flask import Flask, request, send_from_directory, jsonify
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 
 UPLOAD_FOLDER = 'uploads'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 app = Flask(__name__)
+limiter = Limiter(
+    get_remote_address,
+    app=app,
+    default_limits=[]
+)
 
 @app.route('/upload', methods={'POST'})
+@limiter.limit("10 per minute")
 def upload_file():
     if 'file' not in request.files:
         return jsonify({'error': 'no file part'}), 400
