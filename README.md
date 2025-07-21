@@ -17,7 +17,8 @@ An **incredibly simple** ShareX "CDN"/image hosting site.
 4. Under "Request URL" put "https://yourip:yourport/upload"
 5. Under "Method", keep POST
 6. Set Destination type to Image uploader
-7. Set "URL" at the bottom to {json:url}
+7. Set "File form name" to file
+8. Set "URL" at the bottom to {json:url}
 
 ## Currently planned features
 
